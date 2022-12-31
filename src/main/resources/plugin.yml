@@ -3,3 +3,5 @@ version: '${version}'
 main: me.orbitium.ofpotionparticleremover.PotionParticleRemover
 api-version: 1.19
 authors: [Orbit]
+commands:
+  potionparticle:

@@ -1,5 +1,6 @@
 package me.orbitium.ofpotionparticleremover;
 
+import me.orbitium.ofpotionparticleremover.commands.ReloadCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
 
@@ -20,17 +21,24 @@ public final class PotionParticleRemover extends JavaPlugin {
         // Plugin startup logic
         saveDefaultConfig();
         instance = this;
-        for (Object o : getConfig().getList("worlds")) {
+        getCommand("potionParticle").setExecutor(new ReloadCommand());
+        getCommand("potionParticle").setTabCompleter(new ReloadCommand());
+        load();
+        getServer().getPluginManager().registerEvents(new PotionListener(), this);
+    }
+
+    public static void load() {
+        for (Object o : instance.getConfig().getList("worlds")) {
             Map<String, List<String>> map = (Map<String, List<String>>) o;
             for (Map.Entry<String, List<String>> entry : map.entrySet()) {
                 for (String s : entry.getValue()) {
                     PotionEffectType potionEffectType = PotionEffectType.getByName(s);
                     if (potionEffectType == null) {
-                        getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
-                        getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
-                        getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
-                        getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
-                        getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
+                        instance.getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
+                        instance.getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
+                        instance.getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
+                        instance.getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
+                        instance.getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
                     } else {
                         List<PotionEffectType> l = worlds.getOrDefault(entry.getKey(), new ArrayList<>());
                         l.add(potionEffectType);
@@ -40,17 +48,17 @@ public final class PotionParticleRemover extends JavaPlugin {
             }
         }
 
-        for (Object o : getConfig().getList("regions")) {
+        for (Object o : instance.getConfig().getList("regions")) {
             Map<String, List<String>> map = (Map<String, List<String>>) o;
             for (Map.Entry<String, List<String>> entry : map.entrySet()) {
                 for (String s : entry.getValue()) {
                     PotionEffectType potionEffectType = PotionEffectType.getByName(s);
                     if (potionEffectType == null) {
-                        getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
-                        getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
-                        getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
-                        getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
-                        getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
+                        instance.getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
+                        instance.getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
+                        instance.getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
+                        instance.getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
+                        instance.getLogger().log(Level.SEVERE, "Potion effect couldn't found! Name is: " + s);
                     } else {
                         List<PotionEffectType> l = regions.getOrDefault(entry.getKey(), new ArrayList<>());
                         l.add(potionEffectType);
@@ -59,8 +67,6 @@ public final class PotionParticleRemover extends JavaPlugin {
                 }
             }
         }
-
-        getServer().getPluginManager().registerEvents(new PotionListener(), this);
     }
 
     @Override
