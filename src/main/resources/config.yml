@@ -1,0 +1,18 @@
+# Config of PotionParticleRemover
+
+# SPIGOT CAN'T HANDLE POTIN NAMES AS MINECRAFT NAMES
+# Please check that list: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
+
+# Which worlds will handle potion effects
+worlds:
+  - TEST_WORLD:
+    - "SPEED"
+    - "JUMP"
+
+# Which regions will handle potion effects (in any world)
+regions:
+  - TEST_REGION:
+    - "SPEED"
+  - test:
+    - "SPEED"
+    - "INVISIBILITY"
